@@ -1,168 +1,126 @@
 "use client"
 
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useState } from "react"
 import {
   LayoutDashboard,
   Package,
   BarChart3,
   RefreshCcw,
-  Folder,
   Settings,
-  User,
   ChevronLeft,
 } from "lucide-react"
 
 const menu = [
   {
-    key: "dashboard",
-    label: "Dashboard",
-    sub: "Overview & metrics",
+    name: "Dashboard",
+    desc: "Overview & metrics",
+    href: "/",
     icon: LayoutDashboard,
   },
   {
-    key: "inventory",
-    label: "Inventory",
-    sub: "Product catalog",
+    name: "Inventory",
+    desc: "Product catalog",
+    href: "/inventory",
     icon: Package,
   },
   {
-    key: "analytics",
-    label: "Analytics",
-    sub: "Insights & reports",
+    name: "Analytics",
+    desc: "Insights & reports",
+    href: "/analytics",
     icon: BarChart3,
   },
   {
-    key: "reorders",
-    label: "Reorders",
-    sub: "Automated reordering",
+    name: "Reorders",
+    desc: "Automated reordering",
+    href: "/reorders",
     icon: RefreshCcw,
   },
   {
-    key: "categories",
-    label: "Categories",
-    sub: "Organize products",
-    icon: Folder,
-  },
-  {
-    key: "settings",
-    label: "Settings",
-    sub: "System configuration",
+    name: "Settings",
+    desc: "System configuration",
+    href: "/settings",
     icon: Settings,
   },
 ]
 
 export default function Sidebar() {
-  const [active, setActive] = useState("dashboard")
+  const pathname = usePathname()
   const [collapsed, setCollapsed] = useState(false)
 
   return (
     <aside
-      className={`h-full bg-white border-r border-slate-200 flex flex-col
-      transition-all duration-300
-      ${collapsed ? "w-20" : "w-64"}`}
+      className={`${
+        collapsed ? "w-20" : "w-64"
+      } bg-white border-r border-slate-200 flex flex-col transition-all duration-300`}
     >
-      {/* Navigation header */}
-      <div className="px-6 pt-4 pb-3 border-b border-slate-200">
+      {/* NAVIGATION HEADER */}
+      <div className="px-4 pt-4">
         <div className="flex items-center justify-between">
-          {/* Hide text when collapsed */}
           {!collapsed && (
-            <span className="text-sm font-semibold text-slate-600 tracking-wide">
+            <span className="text-xs font-semibold tracking-wider text-slate-500">
               NAVIGATION
             </span>
           )}
 
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className="p-1.5 rounded-md hover:bg-slate-100 transition"
-            aria-label="Toggle sidebar"
+            className="p-2 rounded-md hover:bg-slate-100"
           >
             <ChevronLeft
-              size={16}
-              className={`text-slate-500 transition-transform ${
+              size={18}
+              className={`transition-transform ${
                 collapsed ? "rotate-180" : ""
               }`}
             />
           </button>
         </div>
+
+        {/* Divider */}
+        <div className="mt-3 border-b border-slate-200" />
       </div>
 
-      {/* SPACE AFTER DIVIDER */}
-      <div className="mt-3" />
-
-      {/* Menu */}
-      <nav className="flex-1 px-2 space-y-1">
-        {menu.map(({ key, label, sub, icon: Icon }) => {
-          const isActive = active === key
+      {/* MENU */}
+      <nav className="flex-1 px-3 py-4 space-y-2">
+        {menu.map((item) => {
+          const active = pathname === item.href
+          const Icon = item.icon
 
           return (
-            <div
-              key={key}
-              onClick={() => setActive(key)}
-              className={`
-                group flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer
-                transition-colors duration-200
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`group flex items-center gap-3 px-3 py-3 rounded-xl transition
                 ${
-                  isActive
+                  active
                     ? "bg-blue-600 text-white"
                     : "text-slate-600 hover:bg-blue-50 hover:text-blue-600"
-                }
-              `}
+                }`}
             >
-              <Icon
-                size={20}
-                className={`
-                  ${
-                    isActive
-                      ? "text-white"
-                      : "text-slate-500 group-hover:text-blue-600"
-                  }
-                `}
-              />
+              <Icon size={20} />
 
               {!collapsed && (
-                <div className="flex-1">
-                  <div className="text-sm font-medium">{label}</div>
+                <div className="leading-tight">
+                  <div className="font-medium">{item.name}</div>
                   <div
                     className={`text-xs ${
-                      isActive
-                        ? "text-white/90"
-                        : "text-slate-400 group-hover:text-blue-600"
+                      active ? "text-blue-100" : "text-slate-400"
                     }`}
                   >
-                    {sub}
+                    {item.desc}
                   </div>
                 </div>
               )}
 
-              {/* Active indicator */}
-              {isActive && !collapsed && (
-                <div className="w-1 h-6 bg-white rounded-full ml-auto" />
+              {/* Active indicator bar */}
+              {active && (
+                <span className="ml-auto h-5 w-1 rounded-full bg-white" />
               )}
-            </div>
+            </Link>
           )
         })}
       </nav>
-
-      {/* User */}
-      <div className="p-4 border-t border-slate-200">
-        <div
-          className={`flex items-center gap-3 rounded-xl px-3 py-3
-          ${collapsed ? "justify-center" : "bg-slate-100"}`}
-        >
-          <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white">
-            <User size={16} />
-          </div>
-
-          {!collapsed && (
-            <div>
-              <div className="text-sm font-medium">Admin User</div>
-              <div className="text-xs text-slate-500">
-                admin@inventorypro.com
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
     </aside>
   )
 }

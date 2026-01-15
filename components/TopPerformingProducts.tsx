@@ -13,7 +13,7 @@ const products = [
     {
         name: "Ergonomic Office Chair",
         category: "Furniture",
-        image: "/products/office_chaire.jpg",
+        image: "/products/chair.jpg",
         units: 67,
         sales: 456,
         growth: 15,
