@@ -1,14 +1,33 @@
 "use client"
 
 import { ChevronDown, Filter } from "lucide-react"
+import React from "react"
+
+/* ================= TYPES ================= */
+
+type Filters = {
+  category: string
+  stock: string
+  price: string
+  supplier: string
+}
 
 type Props = {
   open: boolean
   setOpen: (v: boolean) => void
-  filters: any
-  setFilters: (v: any) => void
+  filters: Filters
+  setFilters: React.Dispatch<React.SetStateAction<Filters>>
   count: number
 }
+
+type SelectProps = {
+  label: string
+  value: string
+  onChange: (value: string) => void
+  options: string[]
+}
+
+/* ================= COMPONENT ================= */
 
 export default function AdvancedFilters({
   open,
@@ -38,24 +57,18 @@ export default function AdvancedFilters({
 
         <ChevronDown
           size={18}
-          className={`transition-transform ${
-            open ? "rotate-180" : ""
-          }`}
+          className={`transition-transform ${open ? "rotate-180" : ""}`}
         />
       </button>
 
-      {/* DIVIDER */}
       {open && <div className="border-t border-slate-200" />}
 
-      {/* CONTENT */}
       {open && (
         <div className="p-4 space-y-4">
           <Select
             label="Category"
             value={filters.category}
-            onChange={(v) =>
-              setFilters({ ...filters, category: v })
-            }
+            onChange={(v) => setFilters({ ...filters, category: v })}
             options={[
               "All Categories",
               "Electronics",
@@ -68,9 +81,7 @@ export default function AdvancedFilters({
           <Select
             label="Stock Level"
             value={filters.stock}
-            onChange={(v) =>
-              setFilters({ ...filters, stock: v })
-            }
+            onChange={(v) => setFilters({ ...filters, stock: v })}
             options={[
               "All Levels",
               "In Stock",
@@ -83,9 +94,7 @@ export default function AdvancedFilters({
           <Select
             label="Price Range"
             value={filters.price}
-            onChange={(v) =>
-              setFilters({ ...filters, price: v })
-            }
+            onChange={(v) => setFilters({ ...filters, price: v })}
             options={[
               "All Prices",
               "$0 - $50",
@@ -98,9 +107,7 @@ export default function AdvancedFilters({
           <Select
             label="Supplier"
             value={filters.supplier}
-            onChange={(v) =>
-              setFilters({ ...filters, supplier: v })
-            }
+            onChange={(v) => setFilters({ ...filters, supplier: v })}
             options={[
               "All Suppliers",
               "TechSupply Co.",
@@ -129,7 +136,9 @@ export default function AdvancedFilters({
   )
 }
 
-function Select({ label, value, onChange, options }: any) {
+/* ================= SELECT ================= */
+
+function Select({ label, value, onChange, options }: SelectProps) {
   return (
     <div>
       <label className="text-sm text-slate-600">{label}</label>
@@ -138,8 +147,10 @@ function Select({ label, value, onChange, options }: any) {
         onChange={(e) => onChange(e.target.value)}
         className="mt-1 w-full border border-slate-200 rounded-xl px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
       >
-        {options.map((o: string) => (
-          <option key={o}>{o}</option>
+        {options.map((o) => (
+          <option key={o} value={o}>
+            {o}
+          </option>
         ))}
       </select>
     </div>
