@@ -5,10 +5,20 @@ import {
   AlertCircle,
   Info,
 } from "lucide-react"
+import React from "react"
 
+/* ---------- TYPES ---------- */
 type AlertType = "critical" | "warning" | "info"
 
-const alerts = [
+interface Alert {
+  type: AlertType
+  title: string
+  description: string
+  time: string
+}
+
+/* ---------- DATA ---------- */
+const alerts: Alert[] = [
   {
     type: "critical",
     title: "Critical Stock Level",
@@ -46,13 +56,14 @@ const alerts = [
   },
 ]
 
+/* ---------- STYLES ---------- */
 const styles: Record<
   AlertType,
   {
     border: string
     text: string
     iconBg: string
-    icon: any
+    icon: React.ElementType
   }
 > = {
   critical: {
@@ -75,6 +86,7 @@ const styles: Record<
   },
 }
 
+/* ---------- COMPONENT ---------- */
 export default function AnalyticsAlerts() {
   return (
     <div className="bg-white border border-slate-200 rounded-2xl p-6 h-[420px] flex flex-col">
@@ -92,29 +104,28 @@ export default function AnalyticsAlerts() {
       {/* Alerts list */}
       <div className="space-y-4 overflow-y-auto pr-2">
         {alerts.map((alert, index) => {
-          const Icon = styles[alert.type].icon
+          const style = styles[alert.type]
+          const Icon = style.icon
 
           return (
             <div
               key={index}
-              className={`border ${styles[alert.type].border} rounded-xl p-4`}
+              className={`border ${style.border} rounded-xl p-4`}
             >
               <div className="flex gap-3">
                 {/* Icon */}
                 <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center ${styles[alert.type].iconBg}`}
+                  className={`w-8 h-8 rounded-full flex items-center justify-center ${style.iconBg}`}
                 >
                   <Icon
                     size={16}
-                    className={styles[alert.type].text}
+                    className={style.text}
                   />
                 </div>
 
                 {/* Content */}
                 <div className="flex-1">
-                  <h4
-                    className={`font-semibold ${styles[alert.type].text}`}
-                  >
+                  <h4 className={`font-semibold ${style.text}`}>
                     {alert.title}
                   </h4>
 
