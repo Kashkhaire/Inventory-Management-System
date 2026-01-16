@@ -9,6 +9,7 @@ import {
   BarChart3,
   RefreshCcw,
   Settings,
+  Folder,
   ChevronLeft,
 } from "lucide-react"
 
@@ -38,6 +39,12 @@ const menu = [
     icon: RefreshCcw,
   },
   {
+    name: "Categories",
+    desc: "Organize products",
+    href: "/categories",
+    icon: Folder,
+  },
+  {
     name: "Settings",
     desc: "System configuration",
     href: "/settings",
@@ -53,9 +60,9 @@ export default function Sidebar() {
     <aside
       className={`${
         collapsed ? "w-20" : "w-64"
-      } bg-white border-r border-slate-200 flex flex-col transition-all duration-300`}
+      } h-full bg-white border-r border-slate-100 flex flex-col transition-all duration-300`}
     >
-      {/* NAVIGATION HEADER */}
+      {/* HEADER */}
       <div className="px-4 pt-4">
         <div className="flex items-center justify-between">
           {!collapsed && (
@@ -77,8 +84,7 @@ export default function Sidebar() {
           </button>
         </div>
 
-        {/* Divider */}
-        <div className="mt-3 border-b border-slate-200" />
+        <div className="mt-3 border-b border-slate-100" />
       </div>
 
       {/* MENU */}
@@ -91,7 +97,7 @@ export default function Sidebar() {
             <Link
               key={item.name}
               href={item.href}
-              className={`group flex items-center gap-3 px-3 py-3 rounded-xl transition
+              className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition
                 ${
                   active
                     ? "bg-blue-600 text-white"
@@ -113,14 +119,36 @@ export default function Sidebar() {
                 </div>
               )}
 
-              {/* Active indicator bar */}
-              {active && (
-                <span className="ml-auto h-5 w-1 rounded-full bg-white" />
+              {/* WHITE ACTIVE BAR (EXACT MATCH) */}
+              {active && !collapsed && (
+                <span className="absolute right-3 h-5 w-1 rounded-full bg-white" />
               )}
             </Link>
           )
         })}
       </nav>
+
+      {/* USER FOOTER */}
+      <div className="p-4 border-t border-slate-100">
+        <div
+          className={`flex items-center gap-3 bg-slate-50 p-3 rounded-xl ${
+            collapsed ? "justify-center" : ""
+          }`}
+        >
+          <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center">
+            A
+          </div>
+
+          {!collapsed && (
+            <div>
+              <p className="text-sm font-medium">Admin User</p>
+              <p className="text-xs text-slate-500">
+                admin@inventorypro.com
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
     </aside>
   )
 }
