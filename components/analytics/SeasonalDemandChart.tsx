@@ -49,9 +49,11 @@ export default function SeasonalDemandChart() {
               tickFormatter={(v) => `${v / 1000}k`}
             />
 
-            {/* TOOLTIP */}
+            {/* TOOLTIP – FIXED */}
             <Tooltip
-              formatter={(v: number) => v.toLocaleString()}
+              formatter={(value) =>
+                value?.toLocaleString() ?? ""
+              }
             />
 
             {/* LEGEND */}
