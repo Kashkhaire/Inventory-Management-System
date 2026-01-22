@@ -1,34 +1,35 @@
 import ReorderItemCard from "./ReorderItemCard"
+import type { Product } from "./ReorderItemCard"
 
-const items = [
+const items: Product[] = [
   {
-    name: "Premium Wireless Headphones",
-    sku: "WH-2024-001",
-    image: "/products/headphones.png",
-    currentStock: 15,
-    reorderPoint: 25,
-    recommended: 100,
-    leadTime: "7–10 days",
-    category: "Electronics",
-    priority: "Critical",
-    autoReorder: false,
-    supplier: "TechSupply Co.",
-    price: "$4550.00",
-  },
-  {
-    name: "Ergonomic Office Chair",
-    sku: "OC-2024-045",
-    image: "/products/chair.jpg",
-    currentStock: 8,
-    reorderPoint: 15,
-    recommended: 50,
-    leadTime: "14–21 days",
-    category: "Furniture",
-    priority: "High",
+    name: "USB Keyboard",
+    sku: "USB-KB-001",
+    image: "/images/keyboard.png",
+    currentStock: 5,
+    reorderPoint: 10,
+    recommended: 20,
+    leadTime: "4 days",
+    category: "Accessories",
+    priority: "High", // ✅ must be exactly one of these
     autoReorder: true,
-    supplier: "Premium Goods Ltd.",
-    price: "$3999.00",
+    supplier: "Logitech",
+    price: "₹1,200"
   },
+  {
+    name: "HDMI Cable",
+    sku: "HDMI-002",
+    image: "/images/hdmi.png",
+    currentStock: 2,
+    reorderPoint: 8,
+    recommended: 15,
+    leadTime: "3 days",
+    category: "Cables",
+    priority: "Critical", // ✅
+    autoReorder: false,
+    supplier: "Belkin",
+    price: "₹499"
+  }
 ]
 
 export default function ReorderList() {

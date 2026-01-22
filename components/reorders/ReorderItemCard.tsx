@@ -4,7 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import { Minus, Plus, Check, ChevronDown, ChevronUp } from "lucide-react"
 
-type Product = {
+export type Product = {
   name: string
   sku: string
   image: string
