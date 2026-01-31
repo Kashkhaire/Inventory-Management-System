@@ -1,3 +1,6 @@
+"use client"
+
+import { useRouter } from "next/navigation"
 import {
   Plus,
   RefreshCcw,
@@ -13,6 +16,7 @@ const actions = [
     color: "bg-blue-600",
     iconBg: "bg-blue-500",
     icon: <Plus size={22} />,
+    route: "/inventory",
   },
   {
     title: "Process Reorder",
@@ -20,6 +24,7 @@ const actions = [
     color: "bg-green-600",
     iconBg: "bg-green-500",
     icon: <RefreshCcw size={22} />,
+    route: "/reorders",
   },
   {
     title: "Generate Report",
@@ -27,6 +32,7 @@ const actions = [
     color: "bg-sky-500",
     iconBg: "bg-sky-400",
     icon: <BarChart3 size={22} />,
+    route: "/analytics",
   },
   {
     title: "Scan Barcode",
@@ -34,10 +40,13 @@ const actions = [
     color: "bg-orange-500",
     iconBg: "bg-orange-400",
     icon: <QrCode size={22} />,
+    route: "/inventory", // or /scanner if you add later
   },
 ]
 
 export default function QuickActions() {
+  const router = useRouter()
+
   return (
     <div className="bg-white border border-slate-200 rounded-2xl p-6">
       <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
@@ -46,6 +55,7 @@ export default function QuickActions() {
         {actions.map((a, i) => (
           <div
             key={i}
+            onClick={() => router.push(a.route)}
             className={`${a.color} text-white rounded-xl p-5 flex items-center justify-between cursor-pointer hover:opacity-95 transition`}
           >
             <div className="flex items-center gap-4">

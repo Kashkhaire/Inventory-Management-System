@@ -11,6 +11,7 @@ import {
   Settings,
   Folder,
   ChevronLeft,
+  Home,
 } from "lucide-react"
 
 const menu = [
@@ -52,7 +53,11 @@ const menu = [
   },
 ]
 
-export default function Sidebar() {
+export default function Sidebar({
+  onNavigate,
+}: {
+  onNavigate?: () => void
+}) {
   const pathname = usePathname()
   const [collapsed, setCollapsed] = useState(false)
 
@@ -63,16 +68,33 @@ export default function Sidebar() {
       } h-full bg-white border-r border-slate-100 flex flex-col transition-all duration-300`}
     >
       {/* HEADER */}
-      <div className="px-4 pt-4">
+      <div className="px-4 pt-4 pb-3 border-b border-slate-100">
         <div className="flex items-center justify-between">
-          {!collapsed && (
-            <span className="text-xs font-semibold tracking-wider text-slate-500">
-              NAVIGATION
-            </span>
-          )}
+          
+          <div className="flex items-center gap-2 font-bold text-lg whitespace-nowrap">
+            <div className="w-9 h-9 rounded-lg bg-blue-600 text-white flex items-center justify-center">
+              <Home size={18} />
+            </div>
 
+            {/* Brand text — ONLY when expanded */}
+            {!collapsed && (
+              <span className="transition-opacity duration-200">
+                InventoryPro
+              </span>
+            )}
+          </div>
+
+          {/* Collapse / Close */}
           <button
-            onClick={() => setCollapsed(!collapsed)}
+            onClick={() => {
+              if (onNavigate) {
+                // 📱 Mobile → close sidebar
+                onNavigate()
+              } else {
+                // 💻 Desktop → collapse sidebar
+                setCollapsed(!collapsed)
+              }
+            }}
             className="p-2 rounded-md hover:bg-slate-100"
           >
             <ChevronLeft
@@ -83,8 +105,6 @@ export default function Sidebar() {
             />
           </button>
         </div>
-
-        <div className="mt-3 border-b border-slate-100" />
       </div>
 
       {/* MENU */}
@@ -97,6 +117,7 @@ export default function Sidebar() {
             <Link
               key={item.name}
               href={item.href}
+              onClick={onNavigate}
               className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition
                 ${
                   active
@@ -119,7 +140,6 @@ export default function Sidebar() {
                 </div>
               )}
 
-              {/* WHITE ACTIVE BAR (EXACT MATCH) */}
               {active && !collapsed && (
                 <span className="absolute right-3 h-5 w-1 rounded-full bg-white" />
               )}
