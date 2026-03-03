@@ -42,7 +42,7 @@ export default function Integrations() {
 
         <IntegrationCard
           name="Amazon Seller Central"
-          desc="Manage Amazon inventory and orders directly from InventoryPro"
+          desc="Manage Amazon inventory and orders directly from TrackPoint"
           status="disconnected"
         />
 

@@ -33,10 +33,10 @@ export default function CompanyProfile() {
 
           <div className="flex-1">
             <h3 className="text-base font-semibold text-gray-900">
-              InventoryPro Solutions Inc.
+              TrackPoint Solutions Inc.
             </h3>
             <p className="text-sm text-gray-500">
-              contact@inventorypro.com
+              contact@trackpoint.co.in
             </p>
 
             <div className="mt-6 grid grid-cols-2 gap-x-24 gap-y-5">

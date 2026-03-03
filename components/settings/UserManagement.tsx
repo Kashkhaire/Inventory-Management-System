@@ -37,25 +37,25 @@ export default function UserManagement() {
         <UserRow
           name="Sarah Johnson"
           role="Business Owner"
-          email="sarah.johnson@inventorypro.com"
+          email="sarah.johnson@trackpoint.co.in"
           active="2 minutes ago"
         />
         <UserRow
           name="Michael Chen"
           role="Operations Manager"
-          email="michael.chen@inventorypro.com"
+          email="michael.chen@trackpoint.co.in"
           active="15 minutes ago"
         />
         <UserRow
           name="Emily Rodriguez"
           role="Warehouse Staff"
-          email="emily.rodriguez@inventorypro.com"
+          email="emily.rodriguez@trackpoint.co.in"
           active="1 hour ago"
         />
         <UserRow
           name="David Thompson"
           role="View Only"
-          email="david.thompson@inventorypro.com"
+          email="david.thompson@trackpoint.co.in"
           active="3 days ago"
         />
       </div>

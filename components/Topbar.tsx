@@ -47,7 +47,7 @@ export default function Topbar({
           <div className="w-9 h-9 rounded-lg bg-blue-600 text-white flex items-center justify-center">
             <Home size={18} />
           </div>
-          InventoryPro
+          TrackPoint
         </div>
 
         {/* Desktop Navigation */}

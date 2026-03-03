@@ -23,7 +23,7 @@ export default function Page() {
         System Settings
       </h1>
       <p className="mt-1 text-[15px] text-gray-500">
-        Configure your platform preferences, manage users, and customize your InventoryPro experience
+        Configure your platform preferences, manage users, and customize your TrackPoint experience
       </p>
 
       {/* Tabs */}

@@ -79,7 +79,7 @@ export default function Sidebar({
             {/* Brand text — ONLY when expanded */}
             {!collapsed && (
               <span className="transition-opacity duration-200">
-                InventoryPro
+                TrackPoint
               </span>
             )}
           </div>
@@ -163,7 +163,7 @@ export default function Sidebar({
             <div>
               <p className="text-sm font-medium">Admin User</p>
               <p className="text-xs text-slate-500">
-                admin@inventorypro.com
+                admin@trackpoint.co.in
               </p>
             </div>
           )}
