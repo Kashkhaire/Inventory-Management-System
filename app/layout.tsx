@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
-import Sidebar from "@/components/Sidebar"
+import ConditionalSidebar from "@/components/ConditionalSidebar"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,8 +28,8 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <div className="h-screen flex overflow-hidden">
 
-          {/* Sidebar */}
-          <Sidebar />
+          {/* Sidebar - hidden on login page */}
+          <ConditionalSidebar />
 
           {/* Main content */}
           <main className="flex-1 overflow-y-auto bg-background p-6 lg:p-8">

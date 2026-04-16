@@ -1,3 +1,7 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import StatCard from "@/components/StatCard"
 import AlertCard from "@/components/AlertCard"
 import InventoryChart from "@/components/InventoryChart"
@@ -6,6 +10,15 @@ import RecentActivity from "@/components/RecentActivity"
 import TopPerformingProducts from "@/components/TopPerformingProducts"
 
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      router.push('/login');
+    }
+  }, []);
+  
   return (
     <>
       {/* Header */}

@@ -1,8 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
 import {
   LayoutDashboard,
   Package,
@@ -12,6 +12,7 @@ import {
   Folder,
   ChevronLeft,
   Home,
+  LogOut,
 } from "lucide-react"
 
 const menu = [
@@ -60,6 +61,7 @@ export default function Sidebar({
 }) {
   const pathname = usePathname()
   const [collapsed, setCollapsed] = useState(false)
+  const router = useRouter()
 
   return (
     <aside
@@ -160,12 +162,25 @@ export default function Sidebar({
           </div>
 
           {!collapsed && (
-            <div>
-              <p className="text-sm font-medium">Admin User</p>
-              <p className="text-xs text-slate-500">
-                admin@trackpoint.co.in
-              </p>
-            </div>
+            <>
+              <div>
+                <p className="text-sm font-medium">Admin User</p>
+                <p className="text-xs text-slate-500">
+                  admin@trackpoint.co.in
+                </p>
+              </div>
+              <button
+                onClick={() => {
+                  localStorage.removeItem('access_token')
+                  localStorage.removeItem('refresh_token')
+                  router.push('/login')
+                }}
+                className="p-2 rounded-lg hover:bg-red-50 hover:text-red-500 text-slate-400 transition-colors"
+                title="Logout"
+              >
+                <LogOut size={16} />
+              </button>
+            </>
           )}
         </div>
       </div>
